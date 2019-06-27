@@ -1,5 +1,4 @@
 import app from "./app";
-const app = express();
 
 const PORT = 4000;
 
