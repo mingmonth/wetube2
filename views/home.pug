@@ -1,9 +1,17 @@
 extends layouts/main.pug
+include mixins/deviceBlock
 
-block content
-    p API
-        ul
-            li
-                a(href="/api/getDeviceList") GetDeviceList
-            li
-                a(href="/api/getDeviceListNoScene") GetDeviceListNoScene
+block content    
+    if !user.isAuthenticated          
+        p 로그인해주세요!!!
+    else
+        .getDeviceList
+            each device in getDeviceList
+                each deviceList in device.deviceList
+                    +deviceBlock({
+                        mac: deviceList.mac,
+                        deviceId: deviceList.deviceId,
+                        model: deviceList.model,
+                        deviceName: deviceList.deviceName
+                    })
+                    include partials/button1

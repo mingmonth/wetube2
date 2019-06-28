@@ -1,0 +1,14 @@
+extends layouts/main.pug
+include mixins/userBlock
+
+block content
+    p 사용자상세 | #{id}
+    .userList
+        each users in userList               
+            if users.id == id
+                +userBlock({
+                    id: users.id,
+                    name: users.name,
+                    email: users.email
+                })  
+            

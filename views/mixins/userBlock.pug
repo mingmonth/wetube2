@@ -1,0 +1,6 @@
+mixin userBlock(userInfo = {})
+    .userBlock
+        a(href=routes.userDetail(userInfo.id))
+            h4.userBlock__id=userInfo.id
+        h4.userBlock__id=userInfo.name
+        h4.userBlock__id=userInfo.email        

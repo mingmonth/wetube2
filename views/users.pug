@@ -1,9 +1,12 @@
 extends layouts/main.pug
+include mixins/userBlock
 
 block content
-    p API
-        ul
-            li
-                a(href="/api/getDeviceList") GetDeviceList
-            li
-                a(href="/api/getDeviceListNoScene") GetDeviceListNoScene
+    p 사용자리스트 | #{id}
+    .userList
+        each users in userList            
+            +userBlock({
+                id: users.id,
+                name: users.name,
+                email: users.email
+            })
