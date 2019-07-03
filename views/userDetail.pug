@@ -1,5 +1,9 @@
 extends layouts/main.pug
 include mixins/userBlock
+include mixins/deviceBlock
+
+block scripts
+    script(src='../controllers/userController.js')
 
 block content
     p 사용자상세 | #{id}
@@ -11,4 +15,62 @@ block content
                     name: users.name,
                     email: users.email
                 })
-            
+    .responseData
+        p 응답데이터 | 
+        each deviceList in responseData.deviceList
+            +deviceBlock({
+                mac: deviceList.mac,
+                deviceId: deviceList.deviceId,
+                model: deviceList.model,
+                deviceName: deviceList.deviceName
+            })
+            if deviceList.deviceType == 29
+                button(onclick="editItem()", title="Edit")
+                    |  Edit
+                .button_on
+                    button(type = "button", onclick="commandAPI()", title="ON")                        
+                        | ON | #{deviceList.mac}
+                .button
+                    button
+                        span
+                        | OFF
+            else if deviceList.deviceType == 6
+                p TV 입니다.
+                    .button
+                        button
+                            span
+                            | ON
+                    .button
+                        button
+                            span
+                            | OFF
+            else if deviceList.deviceType == 5
+                p Aircon 입니다.
+                .button
+                    button
+                        span
+                        | ON
+                .button
+                    button
+                        span
+                        | OFF
+                .button
+                    button
+                        span
+                        | MODE
+                .button
+                    button
+                        span
+                        | SPEED
+            else if deviceList.deviceType == 60
+                p Projector 입니다.
+                .button
+                    button
+                        span
+                        | ON
+                .button
+                    button
+                        span
+                        | OFF
+            else if deviceList.deviceType == 30
+                p mBox 입니다.                
